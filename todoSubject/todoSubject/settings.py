@@ -84,12 +84,29 @@ DATABASES = {
     }
 '''
 
+import json
+from django.core.exceptions import ImproperlyConfigured
+
+with open("secret.json") as f:
+    secrets = json.loads(f.read())
+
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured
+
+SECRET_ID = get_secret("SECRET_ID")
+SECRET_PW = get_secret("SECRET_PASSWORD")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'todo_app',
-        'USER': 'root',
-        'PASSWORD': '1234',
+        'USER': SECRET_ID,
+        'PASSWORD': SECRET_PW,
         'HOST': '127.0.0.1',
         'POST': '3306',
     }
