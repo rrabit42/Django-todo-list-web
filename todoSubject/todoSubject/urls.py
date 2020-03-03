@@ -8,5 +8,5 @@ urlpatterns = [
     path('home/', include('todo_main.urls')),
 
     # board app
-    path('board/', include('todo_board.urls')),
+    path('board/', include('todo_board.urls'))
 ]
