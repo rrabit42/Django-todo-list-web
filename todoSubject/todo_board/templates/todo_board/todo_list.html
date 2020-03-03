@@ -5,7 +5,10 @@
 <div class="col-md-12">
     <div class="container">
         {% for list in todo_list %}
-            {{ list.title }} <br>
+            <div class="list-group-item">
+                <input type="checkbox" name="{{ list.title }} value={{ list.title }}">
+                {{ list.title }}
+            </div>
         {% endfor %}
     </div>
 </div>
