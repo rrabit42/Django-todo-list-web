@@ -20,6 +20,12 @@ class TodoList(models.Model):
     priority = models.IntegerField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
 
+    # 저장 버튼을 누르면 바로 저장을 하지 않고, todo_save 함수를 호출하면 그제서야 저장
+    # 이렇게 하는 이유는 여러가지가 있지만, save하기 전에 default로 db 값을 넣어주도록 하기 위해서 이렇게 함
+    # 예를 들어서 is_complete는 1이 아닌 0의 값을 가져야 하기 때문에 0으로 넣어주는 등의 작업!
+    def todo_save(self):
+        self.save()
+
     class Meta:
         managed = False
         db_table = 'todo_list'

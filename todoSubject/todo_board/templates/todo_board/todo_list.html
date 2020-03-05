@@ -11,6 +11,10 @@
             </div>
         {% endfor %}
     </div>
+{#    여기서는 단순히 페이지가 넘어가는 거니까 GET으로 넘어감#}
+    <button type="button" class="btn btn-primmary" onclick="location.href='{% url 'todo_board:todo_board_insert' %}'">
+            일정추가
+    </button>
 </div>
 
 {% endblock main %}
