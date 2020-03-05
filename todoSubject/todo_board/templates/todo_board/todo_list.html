@@ -4,12 +4,16 @@
 
 <div class="col-md-12">
     <div class="container">
+        <div id="exmaple1" class="list-group col">
         {% for list in todo_list %}
             <div class="list-group-item">
-                <input type="checkbox" name="{{ list.title }} value={{ list.title }}">
-                {{ list.title }}
+                <input type="checkbox" name="{{ list.title }} value={{ list.title }}"/>
+                <a href="{% url 'todo_board:todo_board_detail' pk=list.no %}">
+                    {{ list.title }}
+                </a>
             </div>
         {% endfor %}
+        </div>
     </div>
 {#    여기서는 단순히 페이지가 넘어가는 거니까 GET으로 넘어감#}
     <button type="button" class="btn btn-primmary" onclick="location.href='{% url 'todo_board:todo_board_insert' %}'">

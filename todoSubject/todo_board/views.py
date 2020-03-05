@@ -26,3 +26,9 @@ def check_post(request):
         template_name = 'todo_board/todo_board_insert.html'
         form = TodoForm
         return render(request, template_name, {"form": form})
+
+
+class Todo_board_detail(generic.DetailView):
+    model = TodoList
+    template_name = 'todo_board/todo_board_detail.html'
+    context_object_name = 'todo_list' # 해당 object의 이름을 설정, 그래서 template에 저 이름을 가지고 접근
