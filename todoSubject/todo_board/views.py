@@ -61,3 +61,9 @@ get으로 수정페이지에 들어간다면(수정완료 버튼을 누른 상�
 기존에 작성한 내용이 적용되어 있어야함 그래서 object를 받아오고 get_form_class를 통해 폼을 가져옴
 이후 get_context_data를 통해 context를 만들고 render_to_response를 해주면 그 전에 있던 값이 적용됨
 '''
+
+
+class Todo_board_delete(generic.DeleteView):
+    model = TodoList
+    success_url = '/board/'
+    context_object_name = 'todo_list'
