@@ -87,7 +87,7 @@ DATABASES = {
 import json
 from django.core.exceptions import ImproperlyConfigured
 
-with open("secret.json") as f:
+with open("../secret.json") as f:
     secrets = json.loads(f.read())
 
 

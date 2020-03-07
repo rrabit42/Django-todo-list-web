@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,10 +78,31 @@ WSGI_APPLICATION = 'todoSubject_restfulAPI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+import json
+from django.core.exceptions import ImproperlyConfigured
+
+# 프로젝트의 manage.py가 있는 곳에서 상위폴더
+with open("../secret.json") as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured
+
+SECRET_ID = get_secret("SECRET_ID")
+SECRET_PW = get_secret("SECRET_PASSWORD")
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'todo_app',
+        'USER': SECRET_ID,
+        'PASSWORD': SECRET_PW,
+        'HOST': '127.0.0.1',
+        'POST': '3306',
     }
 }
 
