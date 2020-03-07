@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, CreateAPIView
 
 from .models import TodoList
-from .serializers import TodoSerializer, TodoDetailSerializer
+from .serializers import TodoSerializer, TodoDetailSerializer, TodoCreateSerializer
 
 
 # Read- list view
@@ -31,6 +31,12 @@ class Todo_subject_restful_delete(DestroyAPIView):
     lookup_field = 'no'
     queryset = TodoList.objects.all()
     serializer_class = TodoSerializer
+
+
+class TOdo_subject_restful_create(CreateAPIView):
+    queryset = TodoList.objects.all()
+    serializer_class = TodoCreateSerializer
+
 '''
 requests를 이용하면 기존에 db와 연동하는 것이 아닌,
 rest api와 연동하여 프로그램을 작성할 수 있다.

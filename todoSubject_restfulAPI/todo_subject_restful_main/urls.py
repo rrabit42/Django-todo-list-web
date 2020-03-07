@@ -14,6 +14,7 @@ urlpatterns = [
     path('todo_list/<int:no>', views.Todo_subject_restful_detail.as_view(), name='todo_detail'),
     path('todo_list/<int:no>/update', views.Todo_subject_restful_update.as_view(), name='todo_update'),
     path('todo_list/<int:no>/delete', views.Todo_subject_restful_delete.as_view(), name='todo_delete'),
+    path('todo_list/create/', views.TOdo_subject_restful_create.as_view(), name='todo_detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
