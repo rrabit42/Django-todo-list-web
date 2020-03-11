@@ -6,6 +6,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
+from blog.views import blog_page
 
 schema_url_v1_patterns = [
     # path('v1/', include(), namespace)
@@ -35,4 +36,7 @@ urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/v1/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/v1/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc-v1'),
+
+    # blog
+    path('blog/', blog_page)
 ]
