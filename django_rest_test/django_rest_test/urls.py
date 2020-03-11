@@ -6,7 +6,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-from blog.views import blog_page
+from blog.views import blog_page, blog_api
 
 schema_url_v1_patterns = [
     # path('v1/', include(), namespace)
@@ -38,5 +38,8 @@ urlpatterns = [
     url(r'^redoc/v1/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc-v1'),
 
     # blog
-    path('blog/', blog_page)
+    path('blog/', blog_page),
+
+    # Rest
+    path('api/blog/', blog_api.as_view()),
 ]
