@@ -6,6 +6,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
+import post_service
 from blog.views import blog_page, blog_api
 
 schema_url_v1_patterns = [
@@ -42,4 +43,7 @@ urlpatterns = [
 
     # Rest
     path('api/blog/', blog_api.as_view()),
+
+    # post_service
+    path('board/', include('post_service.urls')),
 ]
