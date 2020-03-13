@@ -9,6 +9,10 @@ from post_service.models import Post
 def post_list(request):
     page_data = Paginator(Post.objects.all().order_by('title'), 5)
     page = request.GET.get('page') # GET parameter로 page가 온다고 가정하고 데이터들을 건들임
+
+    if page is None:
+        page = 1
+
     try:
         posts = page_data.page(page)
     except PageNotAnInteger:
