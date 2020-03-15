@@ -45,5 +45,5 @@ urlpatterns = [
     path('api/blog/', blog_api.as_view()),
 
     # post_service
-    path('board/', include('post_service.urls')),
+    path('board/', include('post_service.urls'), name='board'),
 ]
