@@ -1,8 +1,9 @@
 from django.contrib import auth
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from user_manager.forms import LoginForm
+from user_manager.forms import LoginForm, JoinForm
 
 
 def login(request):
@@ -31,3 +32,24 @@ def login_validate(request):
     else:
         return HttpResponse('로그인 폼이 비정상적입니다.')
     return HttpResponse('알 수 없는 오류입니다.')
+
+
+def join_page(request):
+    # POST로 넘어온 데이터에 대해서는 회원 가입 로직을 처리
+    if request.method == 'POST':
+        form_data = JoinForm(request.POST)
+
+        if form_data.is_valid():
+            # 별 문제가 없다면, 회원 가입 로직을 수행하고
+            username = form_data.cleaned_data['id']
+            password = form_data.cleaned_data['password']
+            User.objects.create_user(username=username, password=password)
+            # 로그인 폼으로 이동시킨다.
+            return redirect('login')
+    else:
+        # 만약 GET 등으로 넘어온 데이터면 빈 Form을 만듬
+        form_data = JoinForm()
+    context = {
+        'join_form': JoinForm()
+    }
+    return render(request, 'user_manager/join_page.html', context)
