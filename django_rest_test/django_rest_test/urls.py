@@ -46,4 +46,7 @@ urlpatterns = [
 
     # post_service
     path('board/', include('post_service.urls'), name='board'),
+
+    # user_manager
+    path('user/', include('user_manager.urls'))
 ]
